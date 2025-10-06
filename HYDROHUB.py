@@ -34,20 +34,6 @@ def save_data(data):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 
-def create_genesis(data):
-    if not data.get("ledger"):
-        genesis = {
-            "id": str(uuid.uuid4()),
-            "type": "GENESIS",
-            "timestamp": now_iso(),
-            "author": "system",
-            "payload": {"message": "HydroHub ledger created"},
-        }
-        genesis["hash"] = block_hash(genesis)
-        data["ledger"].append(genesis)
-        save_data(data)
-
-
 def append_block(data, btype, author, payload):
     block = {
         "id": str(uuid.uuid4()),
@@ -67,7 +53,6 @@ st.set_page_config(page_title="HYDROHUB — Blockchain budget transparency", lay
 st.title("HYDROHUB")
 
 data = load_data()
-create_genesis(data)
 
 with st.sidebar:
     st.header("Controls")
@@ -77,7 +62,6 @@ with st.sidebar:
             if DATA_FILE.exists():
                 DATA_FILE.unlink()
             data = {"ledger": []}
-            create_genesis(data)
             st.success("All local data cleared. Refresh the page to reload.")
 
     st.markdown("---")
