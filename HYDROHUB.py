@@ -12,7 +12,7 @@ def now_iso():
     return datetime.utcnow().isoformat() + "Z"
 
 
-def block_hash(block: dict) -> str:
+def block_hash(block: dict):
     block_copy = {k: block[k] for k in sorted(block) if k != "hash"}
     encoded = json.dumps(block_copy, sort_keys=True).encode()
     return hashlib.sha256(encoded).hexdigest()
