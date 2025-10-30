@@ -1,7 +1,6 @@
 streamlit==1.28.1
 sqlalchemy==2.0.23
 alembic==1.12.1
-psycopg2-binary==2.9.7
 passlib[bcrypt]==1.7.4
 python-dotenv==1.0.0
 pandas==2.1.3
